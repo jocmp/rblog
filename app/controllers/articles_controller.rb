@@ -1,6 +1,9 @@
 # Generated `$ bin/rails generate controller articles`
 class ArticlesController < ApplicationController
 
+  # 9.1 Basic Authentication
+http_basic_authenticate_with name: "josiah", password: "unstoppable", except: [:index, :show]
+
   # The usual practice is to place it as the first method in the controller.
   # Let's do it:
   def index
@@ -15,6 +18,10 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
   def create
     # create article here
     @article = Article.new(article_params)
@@ -25,7 +32,7 @@ class ArticlesController < ApplicationController
       render 'new' # ... else show the form again
     end
   end
-  
+
   def update
     @article = Article.find(params[:id])
 
